@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Control de LEDs</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <div class="top">
+    <h1>Panel de Control de LEDs</h1>
+    <a class="logout" href="/logout">Salir</a>
+  </div>
+
+  <div class="led-group">
+    <h2>LED 1</h2>
+    <div class="row">
+      <button id="btnOn1">Encender LED 1</button>
+      <button id="btnOff1">Apagar LED 1</button>
+    </div>
+  </div>
+
+  <div class="led-group">
+    <h2>LED 2</h2>
+    <div class="row">
+      <button id="btnOn2" class="btn-led2">Encender LED 2</button>
+      <button id="btnOff2" class="btn-led2">Apagar LED 2</button>
+    </div>
+  </div>
+
+  <pre id="log"></pre>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
