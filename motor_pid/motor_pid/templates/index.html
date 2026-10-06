@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Motor PID // team5</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <main class="panel">
+    <header class="top">
+      <div>
+        <h1 class="glitch" data-text="MOTOR//PID">MOTOR//PID</h1>
+        <p class="sub">lazo cerrado · L298N + encoder · raspberry team5</p>
+      </div>
+      <div class="top-der">
+        <div class="status" id="status"><span class="punto"></span><span id="statusTxt">conectando</span></div>
+        <a class="btn chico" href="/logout">Salir</a>
+      </div>
+    </header>
+
+    <section class="grid">
+      <div class="marco">
+        <div class="caja">
+          <div class="etiqueta">velocidad real</div>
+          <div class="gauge">
+            <svg viewBox="0 0 220 125">
+              <path d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="#1d1a33" stroke-width="14" />
+              <path id="arco" d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="#00f0ff" stroke-width="14" />
+              <line id="marca" x1="36" y1="110" x2="6" y2="110" stroke="#f3e600" stroke-width="3" />
+            </svg>
+            <div class="lectura">
+              <span class="num" id="rpm">0</span>
+              <small>rpm</small>
+            </div>
+          </div>
+          <div class="datos">
+            <span>pwm <b id="pwm">0</b>%</span>
+            <span>error <b id="err">0</b></span>
+            <span>sentido <b id="sentido">parado</b></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="marco">
+        <div class="caja">
+          <div class="etiqueta">setpoint</div>
+          <div class="vel"><span id="spTxt">0</span><small>rpm</small></div>
+          <input type="range" id="sp" class="slider" min="0" max="300" step="5" value="0" />
+
+          <div class="presets">
+            <button class="btn" data-v="0">0</button>
+            <button class="btn" data-v="50">50</button>
+            <button class="btn" data-v="100">100</button>
+            <button class="btn" data-v="150">150</button>
+            <button class="btn" data-v="200">200</button>
+          </div>
+
+          <div class="dirs">
+            <button class="btn dir" data-dir="ATRAS">◄ Izquierda</button>
+            <button class="btn dir stop activo" data-dir="PARAR">■ Stop</button>
+            <button class="btn dir" data-dir="ADELANTE">Derecha ►</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid fila2">
+      <div class="marco">
+        <div class="caja">
+          <div class="etiqueta">registro de datos</div>
+          <div class="muestras"><span id="muestras">0</span><small>muestras</small></div>
+          <p class="nota">una fila cada 0.1 s mientras el motor se mueve</p>
+          <div class="dos">
+            <button id="btnExcel" class="btn excel">Exportar Excel</button>
+            <button id="btnLimpiar" class="btn stop">Limpiar</button>
+          </div>
+        </div>
+      </div>
+      <div class="marco">
+        <div class="caja">
+          <div class="etiqueta">controlador pid</div>
+          <div class="ganancias">
+            <label>Kp<input id="kp" type="number" step="0.01" min="0" value="0.2" /></label>
+            <label>Ki<input id="ki" type="number" step="0.05" min="0" value="1" /></label>
+            <label>Kd<input id="kd" type="number" step="0.005" min="0" value="0.01" /></label>
+          </div>
+          <button id="btnPid" class="btn ancho">Aplicar constantes</button>
+          <div class="terminos">
+            <span>P <b id="tp">0.00</b></span>
+            <span>I <b id="ti">0.00</b></span>
+            <span>D <b id="td">0.00</b></span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="marco graf">
+      <div class="caja">
+        <div class="etiqueta">setpoint vs rpm · últimos 30 s</div>
+        <canvas id="grafica" width="900" height="220"></canvas>
+        <div class="leyenda">
+          <span class="l-sp">setpoint</span>
+          <span class="l-rpm">rpm medida</span>
+        </div>
+      </div>
+    </section>
+
+    <footer class="pie">
+      <div class="log" id="log"><div>&gt; sistema listo_</div></div>
+      <div class="tecla">[espacio] paro de emergencia</div>
+    </footer>
+  </main>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Acceso // team5</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body class="centro">
+  <main class="login marco">
+    <div class="caja">
+      <h1 class="glitch" data-text="ACCESO//TEAM5">ACCESO//TEAM5</h1>
+      <p class="sub">nodo de control PID, se requiere identificación</p>
+
+      <form method="POST" action="/login">
+        <label for="username">usuario</label>
+        <input id="username" name="username" type="text" autocomplete="username" required />
+
+        <label for="password">contraseña</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required />
+
+        <button class="btn ancho" type="submit">Entrar</button>
+
+        {% if error %}
+          <p class="aviso mal">&gt; {{ error }}</p>
+        {% else %}
+          <p class="aviso">&gt; esperando credenciales_</p>
+        {% endif %}
+      </form>
+    </div>
+  </main>
+</body>
+</html>
